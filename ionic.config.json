@@ -1,0 +1,7 @@
+{
+  "name": "J-Notes",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

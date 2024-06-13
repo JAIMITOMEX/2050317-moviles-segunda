@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reviews</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" *ngFor="let review of reviews">
+        <ion-card *ngIf="review">
+          <ion-card-header>
+            <ion-item lines="none">
+              <ion-label>
+                <ion-card-title>Anonymous</ion-card-title>
+                <div>
+                  <ion-icon name="star" *ngFor="let star of [1, 2, 3, 4, 5]" [color]="star <= review.rating ? 'primary' : 'medium'"></ion-icon>
+                </div>
+              </ion-label>
+            </ion-item>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ review.review }}</p>
+            <p>{{ review.timestamp | date }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
