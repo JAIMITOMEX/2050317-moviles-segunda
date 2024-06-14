@@ -40,7 +40,7 @@
         <ion-col class="contenedor4">
           <ion-icon name="star" *ngFor="let star of [1, 2, 3, 4, 5]" [color]="star <= product.averageRating ? 'secondary' : 'medium'"></ion-icon>
           <p>
-            <ion-button fill="clear" color="primary" [routerLink]="['/reviews']">
+            <ion-button fill="clear" color="primary" (click)="viewReviews()">
               {{ product.totalReviews }} reviews
             </ion-button>
           </p>
@@ -48,7 +48,23 @@
         </ion-col>
       </ion-row>
       <p>{{ product.description }}</p>
-      <ion-button class="barra-abajo custom-button" (click)="addToCarrito()" ion-no-margin>
+
+      <ion-item>
+        <ion-label>Choose Size</ion-label>
+        <ion-select [(ngModel)]="selectedSize" placeholder="Select Size" (ionChange)="checkSelections()">
+          <ion-select-option *ngFor="let size of sizes" [value]="size">{{ size }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Añadir opciones de color -->
+      <ion-item>
+        <ion-label>Color</ion-label>
+        <ion-select [(ngModel)]="selectedColor" placeholder="Select Color" (ionChange)="checkSelections()">
+          <ion-select-option *ngFor="let color of colors" [value]="color">{{ color }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button class="barra-abajo custom-button" (click)="addToCarrito()" [disabled]="!canAddToCart" ion-no-margin>
         Add to Cart | {{ product.price | currency }}
       </ion-button>
     </ion-card-content>

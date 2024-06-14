@@ -11,6 +11,7 @@ export class ReviewModalComponent implements OnInit {
   rating: number;
   review: string;
   productId: string;
+  userId: string;
 
   constructor(private modalController: ModalController, private reviewService: ReviewService) {}
 
@@ -20,13 +21,16 @@ export class ReviewModalComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  submitReview() {
+  async submitReview() {
     if (this.rating && this.review) {
-      this.reviewService.addReview({ rating: this.rating, review: this.review, productId: this.productId, timestamp: new Date() }).then(() => {
-        this.modalController.dismiss();
+      await this.reviewService.addReview({
+        rating: this.rating,
+        review: this.review,
+        productId: this.productId,
+        timestamp: new Date(),
+        userId: this.userId
       });
+      this.modalController.dismiss();
     }
   }
 }
-
-//este cartel indica que es cambio que aun no esta completo (quitar si aun existen fallas latentes en el sistema).

@@ -42,22 +42,26 @@
                 <ion-button (click)="incrementQuantity(item)" color="tertiary"><ion-icon name="add-outline"></ion-icon></ion-button>
               </ion-item>
             </div>
-
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
+
     <ion-row>
       <ion-col size="12">
         <ion-card>
           <ion-card-content>
-            <ion-button expand="block" (click)="checkout()" color="tertiary">Pay | Total: {{ total | currency }}</ion-button>
+            <ion-item>
+              <ion-label>Tarjeta</ion-label>
+              <ion-select [(ngModel)]="selectedCard" placeholder="Seleccione una tarjeta">
+                <ion-select-option value="visa">Visa **** **** **** 1234</ion-select-option>
+                <ion-select-option value="mastercard">Mastercard **** **** **** 5678</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-button expand="block" (click)="checkout()" color="tertiary" [disabled]="!selectedCard">Pay | Total: {{ total | currency }}</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  
 </ion-content>
-

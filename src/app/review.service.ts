@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
+  private reviewsUpdated = new Subject<void>();
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -20,21 +21,13 @@ export class ReviewService {
     );
   }
 
-  addReview(review: any) {
-    return this.firestore.collection('reviews').add(review);
+  addReview(review: { productId: string; rating: number; review: string; timestamp: Date; userId: string }) {
+    return this.firestore.collection('reviews').add(review).then(() => {
+      this.reviewsUpdated.next(); // Emitir evento de actualización
+    });
   }
 
-  getReviews() {
-    return this.firestore.collection('reviews').snapshotChanges().pipe(
-      map(actions => 
-        actions.map(a => {
-          const data = a.payload.doc.data() as any;
-          const id = a.payload.doc.id;
-          return { id, ...data, timestamp: data.timestamp.toDate(), userId: data.userId }; // Asegúrate de obtener userId si está presente
-        })
-      )
-    );
+  getReviewsUpdatedListener(): Observable<void> {
+    return this.reviewsUpdated.asObservable();
   }
 }
-
-//este cartel indica que es cambio que aun no esta completo (quitar si aun existen fallas latentes en el sistema)

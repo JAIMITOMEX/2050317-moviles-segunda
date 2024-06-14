@@ -13,6 +13,7 @@ export class CarritoPage implements OnInit {
   carritoItems: any[] = [];
   userId: string;
   total: number = 0;
+  selectedCard: string = '';  // Variable para almacenar la tarjeta seleccionada
 
   constructor(
     private carritoService: CarritoService,
@@ -81,6 +82,7 @@ export class CarritoPage implements OnInit {
   async checkout() {
     await this.carritoService.clearCarrito(this.userId);
     this.loadCarrito();  // Recargar el carrito para reflejar los cambios
+    this.selectedCard = '';  // Deseleccionar la tarjeta
     this.navCtrl.navigateForward('/home');
     this.presentToast('Compra realizada con éxito');
   }
@@ -93,8 +95,4 @@ export class CarritoPage implements OnInit {
     });
     toast.present();
   }
-
-  
 }
-
-//este cartel indica que es cambio que aun no esta completo (quitar si aun existen fallas latentes en el sistema).

@@ -1,46 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ReviewService } from '../review.service';
 import { UsersService } from '../users.service';
 import { User } from '../models/user.model';
 import { User as FirebaseUser } from '@angular/fire/auth';
 import { AuthenticationService } from '../authentication.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.page.html',
   styleUrls: ['./reviews.page.scss']
 })
-export class ReviewsPage implements OnInit {
+export class ReviewsPage implements OnInit, OnDestroy {
   reviews: any[] = [];
   userInfo: User;
+  private reviewSub: Subscription;
+  productId: string;
 
-  constructor(private reviewService: ReviewService, private usersService: UsersService, private auth: AuthenticationService) {}
+  constructor(private reviewService: ReviewService, private usersService: UsersService, private auth: AuthenticationService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.loadReviews();
+    this.route.queryParams.subscribe(params => {
+      this.productId = params['productId'];
+      if (this.productId) {
+        this.loadReviews();
+      } else {
+        console.error('Product ID is undefined');
+      }
+    });
     this.loadUserInfo();
+    this.reviewSub = this.reviewService.getReviewsUpdatedListener().subscribe(() => {
+      if (this.productId) {
+        this.loadReviews();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.reviewSub) {
+      this.reviewSub.unsubscribe();
+    }
   }
 
   loadReviews() {
-    this.reviewService.getReviews().subscribe(reviews => {
-      this.reviews = reviews.map(review => {
-        if (review.userId) {
-          // Si hay userId, obtén el nombre de usuario y la foto
-          return {
-            ...review,
-            userName: this.getUserName(review.userId),
-            userPhoto: this.getUserPhoto(review.userId)
-          };
-        } else {
-          // Si no hay userId, mantener como anónimo
-          return {
-            ...review,
-            userName: 'Anonymous',
-            userPhoto: 'URL_de_la_imagen_anónima' // Puedes poner una imagen por defecto para anónimos si es necesario
-          };
-        }
+    if (this.productId) {
+      this.reviewService.getProductReviews(this.productId).subscribe(reviews => {
+        this.reviews = reviews;
       });
-    });
+    } else {
+      console.error('Product ID is undefined');
+    }
   }
 
   async loadUserInfo() {
@@ -77,26 +87,4 @@ export class ReviewsPage implements OnInit {
       return null;
     }
   }
-
-  async getUserName(userId: string): Promise<string> {
-    try {
-      const user = await this.getUserData(userId);
-      return user ? user.name : 'Unknown';
-    } catch (error) {
-      console.error('Error fetching user name:', error);
-      return 'Unknown';
-    }
-  }
-
-  async getUserPhoto(userId: string): Promise<string> {
-    try {
-      const user = await this.getUserData(userId);
-      return user && user.fotos.length > 0 ? user.fotos[0] : 'URL_de_la_imagen_por_defecto';
-    } catch (error) {
-      console.error('Error fetching user photo:', error);
-      return 'URL_de_la_imagen_por_defecto';
-    }
-  }
 }
-
-//este cartel indica que es cambio que aun no esta completo (quitar si aun existen fallas latentes en el sistema)

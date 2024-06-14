@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../product.service';
 import { NavController } from '@ionic/angular';
 import { FavoritosService } from '../favoritos.service';
@@ -7,21 +7,22 @@ import { UsersService } from '../users.service';
 import { User } from '../models/user.model';
 import { User as FirebaseUser } from '@angular/fire/auth';
 import { ReviewService } from '../review.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page implements OnInit, OnDestroy {
   products: any[] = [];
   filteredProducts: any[] = [];
   favoritos: Set<string> = new Set();
   showFilterBar = false;
   selectedFilter = 'All';
-  searchQuery = '';  // Variable para almacenar el valor de búsqueda
-
+  searchQuery = ''; // Variable para almacenar el valor de búsqueda
   userInfo: User;
+  private favoritosSub: Subscription;
 
   constructor(
     private productService: ProductService,
@@ -48,11 +49,25 @@ export class Tab1Page implements OnInit {
     });
     this.loadFavoritos();
     this.loadUserInfo();
+
+    this.favoritosSub = this.favoritosService.getFavoritosUpdatedListener().subscribe(() => {
+      this.loadFavoritos();
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.favoritosSub) {
+      this.favoritosSub.unsubscribe();
+    }
   }
 
   async loadFavoritos() {
-    const favoritos = await this.favoritosService.getFavoritos();
-    this.favoritos = new Set(favoritos.map(fav => fav['IDproduct']));
+    try {
+      const favoritos = await this.favoritosService.getFavoritos();
+      this.favoritos = new Set(favoritos.map(fav => fav['IDproduct']));
+    } catch (error) {
+      console.error('Error loading favoritos:', error);
+    }
   }
 
   async loadUserInfo() {
@@ -73,12 +88,7 @@ export class Tab1Page implements OnInit {
       if (userDoc.exists()) {
         const data = userDoc.data();
         const fotos = Array.isArray(data['fotos']) ? data['fotos'] : [data['fotos']];
-        return {
-          id: userDoc.id,
-          name: data['name'],
-          email: data['email'],
-          fotos: fotos,
-        };
+        return { id: userDoc.id, name: data['name'], email: data['email'], fotos: fotos };
       } else {
         console.log('No such document!');
         return null;
@@ -99,12 +109,16 @@ export class Tab1Page implements OnInit {
       return;
     }
 
-    if (event.detail.checked) {
-      await this.favoritosService.addFavorito(product.id);
-      this.favoritos.add(product.id);
-    } else {
-      await this.favoritosService.removeFavorito(product.id);
-      this.favoritos.delete(product.id);
+    try {
+      if (event.detail.checked) {
+        await this.favoritosService.addFavorito(product.id);
+        this.favoritos.add(product.id);
+      } else {
+        await this.favoritosService.removeFavorito(product.id);
+        this.favoritos.delete(product.id);
+      }
+    } catch (error) {
+      console.error('Error updating favorito:', error);
     }
   }
 
@@ -130,5 +144,3 @@ export class Tab1Page implements OnInit {
     }
   }
 }
-
-//este cartel indica que es cambio que aun no esta completo (quitar si aun existen fallas latentes en el sistema).
