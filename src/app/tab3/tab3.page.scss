@@ -1,0 +1,34 @@
+.texto__profile {
+    text-align: center;
+}
+
+.contenedor__informacion{
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    align-items: center;
+}
+
+.contenedor__imagen{
+    margin-top: 20%;
+    height: 200px;
+    width: 200px;
+}
+
+h2, p {
+    margin-top: 40px;
+}
+
+h2 {
+    font-weight: 700;
+}
+
+.imagen {
+    width: 100%;
+    height: 100%;
+}
+
+.contenedor__boton{
+    display: flex;
+    justify-content: center;
+}

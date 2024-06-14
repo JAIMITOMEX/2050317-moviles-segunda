@@ -1,37 +1,59 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>{{ product.name }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <img [src]="product.image" />
+  <div class="contenedor-imagen">
+    <img [src]="product.image" class="imagen" />
+
+
+    <ion-fab slot="fixed" horizontal="start" class="boton-regresar">
+      <ion-fab-button [routerLink]="['/home']" color="light" class="no-shadow">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+
+
   <ion-card>
-    <ion-card-header>
+
+    <ion-card-header class="contenedor2">
       <ion-card-title>{{ product.name }}</ion-card-title>
+      <ion-grid>
+        <ion-row class="quantity-row justify-content-end">
+          <ion-col size="auto">
+            <ion-button fill="outline" shape="round" class="quantity-button" (click)="decrementQuantity()" color="dark">
+              <ion-icon slot="icon-only" name="remove-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="auto" class="quantity-col">
+            <ion-input [(ngModel)]="quantity" type="number" min="1" class="quantity-input"></ion-input>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-button fill="outline" shape="round" class="quantity-button" (click)="incrementQuantity()" color="dark">
+              <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+
+    <ion-card-content class="contenedor3">
       <ion-row>
-        <ion-col>
-          <ion-icon name="star" *ngFor="let star of [1, 2, 3, 4, 5]" [color]="star <= product.averageRating ? 'primary' : 'medium'"></ion-icon>
+        <ion-col class="contenedor4">
+          <ion-icon name="star" *ngFor="let star of [1, 2, 3, 4, 5]" [color]="star <= product.averageRating ? 'secondary' : 'medium'"></ion-icon>
           <p>
             <ion-button fill="clear" color="primary" [routerLink]="['/reviews']">
               {{ product.totalReviews }} reviews
             </ion-button>
           </p>
+          <ion-button (click)="openReviewModal()">Leave a Review</ion-button>
         </ion-col>
       </ion-row>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{ product.type }}</p>
-      <p>{{ product.price | currency }}</p>
       <p>{{ product.description }}</p>
-      <ion-button (click)="openReviewModal()">Leave a Review</ion-button>
-      <ion-item>
-        <ion-label>Quantity</ion-label>
-        <ion-button (click)="decrementQuantity()">-</ion-button>
-        <ion-input [(ngModel)]="quantity" type="number" min="1"></ion-input>
-        <ion-button (click)="incrementQuantity()">+</ion-button>
-      </ion-item>
-      <ion-button (click)="addToCarrito()">Add to Cart</ion-button>
+      <ion-button class="barra-abajo custom-button" (click)="addToCarrito()" ion-no-margin>
+        Add to Cart | {{ product.price | currency }}
+      </ion-button>
     </ion-card-content>
+
   </ion-card>
+
+  
 </ion-content>

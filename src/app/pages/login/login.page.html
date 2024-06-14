@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+  <ion-toolbar class="contenedor__login" color="tertiary">
+    <ion-title class="login__header">Log In</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="header">
-    <ion-title class="title">Welcome Back</ion-title>
+    <ion-title class="title">Log In</ion-title>
     <p class="subTitle">Sign in to acces your account</p>
   </div>
 
@@ -42,12 +42,12 @@
   </form>
 
     <div class="signupLink">
-      <p>New member?<a [routerLink]="['/signup']" style="color: #ffc33f">Signup now</a></p>
+      <p>New member?<a [routerLink]="['/signup']">Sign Up now</a></p>
     </div>
 
     <div>
-      <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px;">
-        <ion-fab-button (click)="signIn()">
+      <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 60px;">
+        <ion-fab-button (click)="signIn()" color="tertiary">
           <ion-icon name="chevron-forward"></ion-icon>
         </ion-fab-button>
       </ion-fab>

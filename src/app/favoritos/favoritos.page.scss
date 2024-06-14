@@ -1,0 +1,33 @@
+.thumbnail-custom {
+    width: 150px; /* Ajusta este valor según tus necesidades */
+    height: 150px; /* Ajusta este valor según tus necesidades */
+    border-radius: 10px; /* Ajusta el radio de los bordes para hacerlos curvados */
+    overflow: hidden; /* Asegura que la imagen se ajuste dentro del thumbnail */
+  }
+  
+  .thumbnail-custom img {
+    width: 100%; /* Ajusta el tamaño de la imagen al tamaño del ion-thumbnail */
+    height: 100%; /* Ajusta el tamaño de la imagen al tamaño del ion-thumbnail */
+    object-fit: cover; /* Ajusta cómo la imagen se ajusta dentro del thumbnail */
+  }
+
+  .label-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra los elementos verticalmente */
+    margin-left: 10px; /* Ajusta el margen izquierdo según sea necesario */
+    flex: 1; /* Ocupa todo el espacio disponible */
+  }
+  
+  .product-name {
+    margin-top: 10px; /* Ajusta el margen superior según el espacio deseado */
+    font-weight: bold; /* Opcional: ajusta el peso de la fuente según el diseño */
+  }
+  
+  .product-type, .product-price {
+    margin-top: 5px; /* Ajusta el margen superior según el espacio deseado */
+    font-size: 14px; /* Opcional: ajusta el tamaño de la fuente según el diseño */
+  }
+  
+
+

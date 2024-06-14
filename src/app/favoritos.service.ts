@@ -45,4 +45,3 @@ export class FavoritosService {
   }
 }
 
-//este cartel indica que es cambio que aun no esta completo (quitar si aun existen fallas latentes en el sistema).

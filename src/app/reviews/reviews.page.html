@@ -1,8 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Reviews</ion-title>
+<ion-header class="barra-arriba">
+  <ion-toolbar color="primary">
+    Reviews
   </ion-toolbar>
 </ion-header>
+
+<ion-fab slot="fixed" horizontal="start" class="boton-regresar">
+  <ion-fab-button [routerLink]="['/home']" color="light" class="no-shadow">
+    <ion-icon name="chevron-back-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 
 <ion-content>
   <ion-grid>
@@ -14,7 +20,7 @@
               <ion-label>
                 <ion-card-title>Anonymous</ion-card-title>
                 <div>
-                  <ion-icon name="star" *ngFor="let star of [1, 2, 3, 4, 5]" [color]="star <= review.rating ? 'primary' : 'medium'"></ion-icon>
+                  <ion-icon name="star" *ngFor="let star of [1, 2, 3, 4, 5]" [color]="star <= review.rating ? 'secondary' : 'medium'"></ion-icon>
                 </div>
               </ion-label>
             </ion-item>

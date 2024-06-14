@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../carrito.service';
 import { AuthenticationService } from '../authentication.service';
-import { NavController, ToastController } from '@ionic/angular';
+import { NavController, ToastController, PopoverController, IonPopover } from '@ionic/angular';
+import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-carrito',
@@ -17,7 +18,8 @@ export class CarritoPage implements OnInit {
     private carritoService: CarritoService,
     private authService: AuthenticationService,
     private navCtrl: NavController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private popoverController: PopoverController
   ) {}
 
   ngOnInit() {
@@ -50,11 +52,26 @@ export class CarritoPage implements OnInit {
     }
   }
 
-  removeFromCarrito(itemId) {
-    this.carritoService.removeItemFromCarrito(itemId).then(() => {
-      this.loadCarrito();
-      this.presentToast('Producto eliminado del carrito');
+  async presentPopover(event: Event, itemId: string) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      event,
+      translucent: true
     });
+
+    await popover.present();
+
+    const { data } = await popover.onDidDismiss();
+    if (data && data.confirm) {
+      await this.removeFromCarrito(itemId);
+      popover.dismiss();
+    }
+  }
+
+  async removeFromCarrito(itemId: string) {
+    await this.carritoService.removeItemFromCarrito(itemId);
+    this.loadCarrito();
+    this.presentToast('Producto eliminado del carrito');
   }
 
   calculateTotal() {
@@ -76,6 +93,8 @@ export class CarritoPage implements OnInit {
     });
     toast.present();
   }
+
+  
 }
 
 //este cartel indica que es cambio que aun no esta completo (quitar si aun existen fallas latentes en el sistema).

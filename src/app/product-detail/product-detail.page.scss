@@ -1,0 +1,103 @@
+.contenedor-imagen {
+    padding: 15px 20px;
+}
+
+.imagen {
+    border-radius: 30px;
+    position: relative;
+}
+
+.contenedor2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 18px;
+}
+
+.quantity-row {
+    align-items: center;
+    justify-content: flex-end; /* Aligns the content to the right */
+    --ion-grid-column-padding: 0;
+  }
+  
+  .quantity-button {
+    --border-radius: 50%;
+    --padding-start: 0;
+    --padding-end: 0;
+    --ion-padding-start: 0;
+    --ion-padding-end: 0;
+    width: 32px;
+    height: 32px;
+    --background: transparent;
+    --box-shadow: none;
+    --border-width: 0;
+    --ion-border-color: transparent;
+  }
+  
+  .quantity-input {
+    text-align: center;
+    border: none;
+    background: transparent;
+    width: 50px; /* Adjust size as needed */
+    --height: 32px; /* Adjust size as needed */
+    --padding-start: 0;
+    --padding-end: 0;
+    --margin-start: 0;
+    --margin-end: 0;
+  }
+  
+  .quantity-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contenedor4 {
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+
+  .barra-abajo {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    border-radius: 40px;
+    border: 10px solid #8b1c80;
+    box-shadow: none;
+    padding: 30px 0;
+  }
+
+  .barra-abajo {
+    border: none !important;  /* Eliminar borde */
+    box-shadow: none !important;  /* Eliminar sombra */
+  }
+
+  .custom-button {
+    --border-radius: 20px; /* Esquinas redondeadas */
+    --color: #fff; /* Texto blanco */
+    --padding-start: 20px; /* Padding a la izquierda */
+    --padding-end: 20px; /* Padding a la derecha */
+    --height: 60px; /* Altura aumentada */
+    --width: auto; /* Ancho ajustable */
+    --font-size: 16px; /* Tamaño de fuente ajustado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  .custom-button ion-icon {
+    margin-right: 8px; /* Espacio entre el icono y el texto */
+  }
+
+  .no-shadow {
+    --box-shadow: none;
+  }
+
+  .boton-regresar {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+  }

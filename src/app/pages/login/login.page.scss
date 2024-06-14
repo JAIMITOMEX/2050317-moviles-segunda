@@ -6,6 +6,7 @@ ion-item{
     --background:#e0e0e0;
     border-radius: 10px;
     margin-bottom: 16px;
+    margin-top: 35px;
 }
 
 .header{
@@ -23,7 +24,6 @@ ion-item{
 
 .signupLink{
     display: flex;
-    margin: auto;
     flex-direction: row;
     align-content: center;
     position: absolute;
@@ -32,12 +32,20 @@ ion-item{
     bottom: 0;
     width: 80%;
     right: 0;
+    background-color: #8b1c80;
+    width: 100%;
 
     p{
         font-size: 0.9rem;
+        margin-left: 10px;
+        margin-right: 12px;
+        color: #c3bcda;
+
     }
     a{
         text-decoration: none;
+        margin-left: 12px;
+        color: #FFF;
     }
 
     .forgotPassword{
@@ -49,4 +57,8 @@ ion-item{
             text-decoration: none;
         }
     }
+}
+
+.login__header{
+    text-align: center;
 }

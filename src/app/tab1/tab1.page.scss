@@ -1,0 +1,71 @@
+.header {
+    padding: 10px;
+}
+
+.contenedor-imagen-perfil {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.contenedor-elementos{
+    position: relative;
+}
+
+.favorito {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+
+.imagenes-producto {
+    border-radius: 20px;
+}
+
+.heart-checkbox {
+    --background: url('/assets/heart-outline.svg') no-repeat center center / contain;
+    --background-checked: url('/assets/heart-filled.svg') no-repeat center center / contain;
+    --border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+
+ion-card {
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: none;
+    margin: 1px;
+}
+
+.informacion-texto {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.separar-elementos{
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.texto-negro {
+    font-size: 15px;
+    font-weight: 1000;
+    color: black;
+}
+
+p {
+    padding-top: 5px;
+    margin: 0;
+}
+
+ion-header {
+    box-shadow: none;
+}
+
+ion-searchbar {
+    margin: 0;
+    padding: 0;
+}
+
+

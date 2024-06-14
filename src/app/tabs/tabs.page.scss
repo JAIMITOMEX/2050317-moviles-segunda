@@ -1,1 +1,16 @@
-
+.custom-tab-bar { 
+    border-radius: 25px; /* Bordes redondeados */
+    margin: 10px; /* Espacio alrededor del tab bar */
+    padding: 5px; /* Espacio interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  }
+  
+  .custom-tab-bar ion-tab-button { 
+    border-radius: 50%; /* Botones redondeados */
+    margin: 0 5px; /* Espacio entre botones */
+  }
+  
+  .custom-tab-bar ion-tab-button ion-icon,
+  .custom-tab-bar ion-tab-button ion-label {
+    color: white; /* Color de los íconos y texto */
+  }

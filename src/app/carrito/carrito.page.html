@@ -1,31 +1,48 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Carrito</ion-title>
+      Checkout
   </ion-toolbar>
 </ion-header>
+
+<ion-fab slot="fixed" horizontal="start">
+  <ion-fab-button [routerLink]="['/home']" color="light" class="no-shadow">
+    <ion-icon name="chevron-back-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-fab slot="fixed" horizontal="end">
+  <ion-fab-button color="light" class="no-shadow">
+    <ion-icon name="list-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
       <ion-col size="12">
         <ion-list>
-          <ion-item *ngFor="let item of carritoItems">
-            <ion-thumbnail slot="start">
+          <ion-item *ngFor="let item of carritoItems" lines="none" class="product-item">
+            <ion-thumbnail slot="start" class="product-thumbnail">
               <img [src]="item.product.image">
             </ion-thumbnail>
             <ion-label>
               <h2>{{ item.product.name }}</h2>
               <p>{{ item.product.type }}</p>
-              <p>{{ item.product.price | currency }}</p>
-              <ion-item>
-                <ion-button (click)="decrementQuantity(item)">-</ion-button>
-                <ion-input [(ngModel)]="item.quantity" type="number" min="1"></ion-input>
-                <ion-button (click)="incrementQuantity(item)">+</ion-button>
-              </ion-item>
+              <h3>{{ item.product.price | currency }}</h3>
             </ion-label>
-            <ion-button (click)="removeFromCarrito(item.id)" color="danger">
-              <ion-icon slot="icon-only" name="trash"></ion-icon>
-            </ion-button>
+          
+            <div class="contenedor-botones">
+              <ion-button fill="clear" id="{{'trigger-' + item.id}}" (click)="presentPopover($event, item.id)">
+                <ion-icon slot="icon-only" name="ellipsis-horizontal" color="dark"></ion-icon>
+              </ion-button>
+            
+              <ion-item>
+                <ion-button (click)="decrementQuantity(item)" color="tertiary"><ion-icon name="remove-outline"></ion-icon></ion-button>
+                <ion-input [(ngModel)]="item.quantity" type="number" min="1" class="quantity-input" color="tertiary"></ion-input>
+                <ion-button (click)="incrementQuantity(item)" color="tertiary"><ion-icon name="add-outline"></ion-icon></ion-button>
+              </ion-item>
+            </div>
+
           </ion-item>
         </ion-list>
       </ion-col>
@@ -34,15 +51,13 @@
       <ion-col size="12">
         <ion-card>
           <ion-card-content>
-            <ion-item>
-              <ion-label>Total</ion-label>
-              <ion-note slot="end">{{ total | currency }}</ion-note>
-            </ion-item>
-            <ion-button expand="block" (click)="checkout()">Pay</ion-button>
+            <ion-button expand="block" (click)="checkout()" color="tertiary">Pay | Total: {{ total | currency }}</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  
 </ion-content>
 

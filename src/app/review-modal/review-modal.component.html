@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Leave a Review</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()">Close</ion-button>
@@ -10,13 +10,13 @@
 <ion-content>
   <ion-item>
     <ion-label>Rating</ion-label>
-    <ion-range min="0" max="5" step="1" snaps="true" [(ngModel)]="rating">
+    <ion-range min="0" max="5" step="1" snaps="true" [(ngModel)]="rating" color="secondary">
       <ion-icon slot="start" name="star-outline"></ion-icon>
       <ion-icon name="star"></ion-icon>
       <ion-icon name="star"></ion-icon>
       <ion-icon name="star"></ion-icon>
       <ion-icon name="star"></ion-icon>
-      <ion-icon slot="end" name="star"></ion-icon>
+      <ion-icon slot="end" name="star" color="secondary"></ion-icon>
     </ion-range>
   </ion-item>
 

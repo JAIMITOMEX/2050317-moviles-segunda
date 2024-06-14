@@ -4,8 +4,8 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { ReviewModalComponent } from '../review-modal/review-modal.component';
 import { CarritoService } from '../carrito.service';
 import { AuthenticationService } from '../authentication.service';
-import { User } from '../models/user.model';
-import { UsersService } from '../users.service';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -23,7 +23,8 @@ export class ProductDetailPage implements OnInit {
     private modalController: ModalController,
     private carritoService: CarritoService,
     private authService: AuthenticationService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -34,9 +35,25 @@ export class ProductDetailPage implements OnInit {
         this.product.totalReviews = this.product.totalReviews || 0;
       }
       this.authService.getProfile().then(user => {
-        this.userId = user.uid;
+        if (user && user.uid) {
+          this.userId = user.uid;
+        } else {
+          this.handleUserNotLoggedIn();
+        }
       });
     });
+  }
+
+  async handleUserNotLoggedIn() {
+    const toast = await this.toastController.create({
+      message: 'User not logged in. Please log in first.',
+      duration: 2000,
+      color: 'warning'
+    });
+    toast.present();
+    
+    // Redirige al login
+    this.router.navigate(['/login']);
   }
 
   incrementQuantity() {
@@ -50,6 +67,16 @@ export class ProductDetailPage implements OnInit {
   }
 
   async addToCarrito() {
+    if (!this.userId) {
+      const toast = await this.toastController.create({
+        message: 'User not logged in. Please log in first.',
+        duration: 2000,
+        color: 'danger'
+      });
+      toast.present();
+      return;
+    }
+    
     await this.carritoService.addItemToCarrito(this.userId, this.product, this.quantity);
     const toast = await this.toastController.create({
       message: 'Producto añadido al carrito',

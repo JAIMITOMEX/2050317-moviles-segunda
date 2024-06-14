@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="header">
   <!-- Nuevo toolbar para el mensaje de bienvenida -->
   <ion-toolbar>
     <ion-grid>
@@ -7,19 +7,19 @@
           <p>Hello, Welcome 👋</p>
           <p><strong>{{ userInfo?.name }}</strong></p>
         </ion-col>
-        <ion-col size="3" class="ion-text-right">
-          <ion-avatar>
-            <img [src]="userInfo?.fotos[0]" alt="User photo">
+        <ion-col size="3" class="ion-text-right" class="contenedor-imagen-perfil">
+          <ion-avatar >
+            <img [src]="userInfo?.fotos[0]" alt="User photo" class="foto-perfil">
           </ion-avatar>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-toolbar>
-  <ion-toolbar>
-    <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
+  <ion-toolbar class="busqueda">
+    <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" mode="ios" placeholder="Search clothes..."></ion-searchbar>
     <ion-buttons slot="end">
       <ion-button (click)="toggleFilterBar()">
-        <ion-icon slot="icon-only" name="funnel-outline"></ion-icon>
+        <ion-icon slot="icon-only" name="options-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -41,25 +41,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
   <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngFor="let product of filteredProducts">
+      <ion-col size="6" *ngFor="let product of filteredProducts" class="producto">
         <ion-card (click)="viewProduct(product)">
-          <img [src]="product.image" />
-          <ion-card-header>
-            <ion-card-title>{{ product.name }}</ion-card-title>
+          <div class="contenedor-elementos">
+            <img [src]="product.image" class="imagenes-producto" />
+            <ion-checkbox 
+            [checked]="isFavorito(product.id)" 
+            (click)="$event.stopPropagation()" 
+            (ionChange)="toggleFavorito($event, product)" 
+            class="favorito heart-checkbox" color="light">
+            </ion-checkbox>
+          </div>
+          <ion-card-header class="informacion-texto">
+            <p class="texto-negro">{{ product.name }}</p>
+            <p>{{ product.type }}</p>
+          </ion-card-header>
+          <ion-card-content class="separar-elementos">
+            <p class="texto-negro">{{ product.price | currency }}</p>
             <ion-row>
               <ion-col>
-                <ion-icon name="star" *ngFor="let star of [1,2,3,4,5]" [color]="star <= product.averageRating ? 'primary' : 'medium'"></ion-icon>
+                <ion-icon name="star" *ngFor="let star of [1,2,3,4,5]" [color]="star <= product.averageRating ? 'secondary' : 'medium'" ></ion-icon>
                 <p>{{ product.totalReviews }} reviews</p>
               </ion-col>
             </ion-row>
-          </ion-card-header>
-          <ion-card-content>
-            <p>{{ product.type }}</p>
-            <p>{{ product.price | currency }}</p>
-            <ion-checkbox [checked]="isFavorito(product.id)" (click)="$event.stopPropagation()" (ionChange)="toggleFavorito($event, product)"></ion-checkbox>
           </ion-card-content>
         </ion-card>
       </ion-col>

@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { CarritoPageRoutingModule } from './carrito-routing.module';
 
 import { CarritoPage } from './carrito.page';
+import { PopoverComponent } from '../popover/popover.component';
+import { PopoverModule } from '../popover/popover.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CarritoPageRoutingModule
+    CarritoPageRoutingModule,
+    PopoverModule
   ],
   declarations: [CarritoPage]
 })

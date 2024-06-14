@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-title class="texto__profile">
       Profile
     </ion-title>
   </ion-toolbar>
@@ -13,19 +13,17 @@
     </ion-toolbar>
   </ion-header>
 
-  <div *ngIf="userInfo">
+  <div *ngIf="userInfo" class="contenedor__informacion">
+    <div class="contenedor__imagen">
+      <ion-avatar class="imagen">
+        <img [src]="userInfo.fotos" alt="User photo" >
+      </ion-avatar>
+    </div>
     <h2>{{ userInfo.name }}</h2>
     <p>{{ userInfo.email }}</p>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12">
-          <ion-avatar>
-            <img [src]="userInfo.fotos" alt="User photo">
-          </ion-avatar>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
   </div>
 
-  <ion-button expand="full" (click)="logout()">Logout</ion-button>
+  <div class="contenedor__boton">
+    <ion-button (click)="logout()" color="tertiary">Logout</ion-button>
+  </div>
 </ion-content>

@@ -1,4 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content-background {
+    background-image: url('https://i.pinimg.com/564x/79/cd/26/79cd268ab83a35ed78ff4c81ca54c49c.jpg');
+    background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* Hace que la imagen de fondo se quede fija al hacer scroll */
+}
+
+
 .container{
+    height: 70%;
+    display: flex;
     text-align: center;
-    margin-top: 50%;
+    flex-direction: column;
+}
+
+
+.texto {
+    margin-top: 40%;
+    padding: 0 20px;
+    font-size: 30px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+}
+
+.contenedor__imagen {
+    height: 350px;
+    margin: 20px 10px;
+}
+
+.imagen {
+    width: 100%;
+    height: 100%;
+}
+
+.boton {
+    margin: 0 10px;
+}
+
+.imagen__fondo {
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
 }

@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>signup</ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-title class="signup__header">Sign Up</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -53,12 +53,12 @@
   </form>
 
     <div class="signinLink">
-      <p>Already a member?<a style="color: #ffc33f" [routerLink]="['/login']">Signin now</a></p>
+      <p>Already a member?<a [routerLink]="['/login']">Sign In now</a></p>
     </div>
 
     <div>
-      <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px;">
-        <ion-fab-button (click)="signUp()">
+      <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 60px;">
+        <ion-fab-button (click)="signUp()" color="tertiary">
           <ion-icon name="chevron-forward"></ion-icon>
         </ion-fab-button>
       </ion-fab>

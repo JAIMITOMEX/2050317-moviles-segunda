@@ -1,26 +1,30 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar color="tertiary">
     <ion-title>
       Favoritos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let product of products">
-      <ion-card (click)="viewProduct(product)">
-        <img [src]="product.image" />
-        <ion-card-header>
-          <ion-card-title>{{ product.name }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>{{ product.type }}</p>
-          <p>{{ product.price | currency }}</p>
-          <ion-button (click)="removeFavorito(product); $event.stopPropagation();">Quitar de Favoritos</ion-button>
-        </ion-card-content>
-      </ion-card>
-    </ion-item>
-  </ion-list>
+<ion-content class="padre1">
+  <ion-card>
+    <ion-card-content>
+      <ion-list *ngFor="let product of products">
+        <ion-item (click)="viewProduct(product)">
+          <ion-thumbnail slot="start" class="thumbnail-custom">
+            <img [src]="product.image" />
+          </ion-thumbnail>
+          <div class="label-container">
+            <ion-label class="product-name">{{ product.name }}</ion-label>
+            <ion-label class="product-type">{{ product.type }}</ion-label>
+            <ion-label class="product-price">{{ product.price | currency }}</ion-label>
+          </div>
+          <ion-button (click)="removeFavorito(product); $event.stopPropagation();" color="danger">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 

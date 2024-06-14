@@ -1,0 +1,89 @@
+.quantity-input {
+    min-width: 10px; /* Establece un ancho mínimo para el input */
+    width: 30px; /* Permite que el input se expanda según su contenido */
+    text-align: center; /* Centra el texto dentro del input */
+  }
+
+img {
+  border-radius: 20px;
+}
+
+.contenedor-botones {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.boton {
+  width: 20px;
+  margin-right: 18px;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-item ion-label {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.product-item h2 {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.product-item p {
+  margin: 0;
+  color: gray;
+}
+
+.product-item h3 {
+  margin: 5px 0 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.quantity-controls {
+  background-color: #8b1c80; /* Color actualizado */
+  border-radius: 10px; /* Ajusta el radio para que sea menos curveado */
+  padding: 5px;
+}
+
+.quantity-button {
+  --background: #8b1c80; /* Color actualizado */
+  --border-radius: 10px; /* Ajusta el radio para que sea menos curveado */
+  padding: 5px;
+  margin: 0;
+  color: white; /* Color del icono */
+}
+
+.quantity-label {
+  text-align: center;
+  margin: 0 10px;
+  color: white; /* Color del texto */
+  font-size: 1.2em;
+}
+
+.product-thumbnail {
+  width: 80px; /* Ajusta el tamaño según sea necesario */
+  height: 80px; /* Ajusta el tamaño según sea necesario */
+  border-radius: 10px; /* Ajusta el radio de borde para que coincida con el diseño */
+}
+
+ion-toolbar {
+  text-align: center;
+  font-weight: 700;
+}
+
+ion-header {
+  box-shadow: none;
+}
+
+.no-shadow {
+  --box-shadow: none;
+}

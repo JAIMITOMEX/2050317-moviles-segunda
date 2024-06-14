@@ -1,16 +1,16 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>landing</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="content-background">
+  <img src="https://i.pinimg.com/564x/e6/42/98/e64298f536d6d7347f56f09692cebba1.jpg" alt="imagen" class="imagen__fondo">
+  <div class="container">
+    <ion-title class="texto">Welcome!</ion-title>
 
-<ion-content [fullscreen]="true">
-<div class="container">
-<ion-title>Tilin Supremo</ion-title>
-</div>
+    <div class="contenedor__imagen">
+      <ion-img class="imagen" src="https://f.fcdn.app/imgs/8c27ca/www.pieceofcake.com.uy/poc/9e20/original/campanias/258/1160x0/poc-bolsa.gif" alt="bolsa"></ion-img>
+    </div>
+
+  </div>
 
   <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px;">
-    <ion-fab-button [routerLink]="['/login']">
+    <ion-fab-button class="boton" color="tertiary" [routerLink]="['/login']">
       <ion-icon name="chevron-forward"></ion-icon>
     </ion-fab-button>
   </ion-fab>
